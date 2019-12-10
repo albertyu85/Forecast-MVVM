@@ -38,7 +38,7 @@ class CurrentFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val currentWeatherResponse = apiService.getCurrentWeather("San Jose")
-            current_text_view.text = currentWeatherResponse.currentWeatherEntry.toString();
+            current_text_view.text = currentWeatherResponse.location.toString();
         }
     }
 

@@ -17,27 +17,12 @@ interface ApixuWeatherAPIService {
 //    & query = New York
 
     @GET("current")
-    suspend fun getCurrentWeather(@Query("query") location: String): CurrentWeatherResponse
+    suspend fun getCurrentWeather(@Query("query") location: String,
+                                  @Query("access_key") key: String = API_KEY): CurrentWeatherResponse
 
     companion object {
         operator fun invoke(): ApixuWeatherAPIService {
 
-            val requestInterceptor = Interceptor {
-                val url = it.request()
-                    .newBuilder()
-                    .addHeader("access_key", API_KEY)
-                    .build()
-                val request = it.request()
-                    .newBuilder()
-                    .url(url.toString())
-                    .build()
-
-                return@Interceptor it.proceed(request)
-            }
-
-            val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(requestInterceptor)
-                .build()
             return Retrofit.Builder()
                 .baseUrl("http://api.weatherstack.com/")
                 .addConverterFactory(GsonConverterFactory.create())
