@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.current_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class CurrentFragment : Fragment() {
@@ -36,9 +37,9 @@ class CurrentFragment : Fragment() {
         // TODO: Use the
         val apiService = ApixuWeatherAPIService()
 
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.Main){
             val currentWeatherResponse = apiService.getCurrentWeather("San Jose")
-            current_text_view.text = currentWeatherResponse.location.toString();
+            current_text_view.text = currentWeatherResponse.currentWeatherEntry.toString();
         }
     }
 

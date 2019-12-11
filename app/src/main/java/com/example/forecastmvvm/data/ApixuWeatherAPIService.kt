@@ -1,10 +1,6 @@
 package com.example.forecastmvvm.data
 
-import com.example.forecastmvvm.data.response.CurrentWeatherResponse
-import kotlinx.coroutines.Deferred
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import com.example.forecastmvvm.data.database.network.response.CurrentWeatherResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -18,7 +14,8 @@ interface ApixuWeatherAPIService {
 
     @GET("current")
     suspend fun getCurrentWeather(@Query("query") location: String,
-                                  @Query("access_key") key: String = API_KEY): CurrentWeatherResponse
+                                  @Query("access_key") key: String = API_KEY,
+                                  @Query("units") unit: String = "f"): CurrentWeatherResponse
 
     companion object {
         operator fun invoke(): ApixuWeatherAPIService {
