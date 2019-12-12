@@ -1,6 +1,7 @@
-package com.example.forecastmvvm.data
+package com.example.forecastmvvm.data.network
 
-import com.example.forecastmvvm.data.database.network.response.CurrentWeatherResponse
+import com.example.forecastmvvm.data.network.response.CurrentWeatherResponse
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -18,9 +19,15 @@ interface ApixuWeatherAPIService {
                                   @Query("units") unit: String = "f"): CurrentWeatherResponse
 
     companion object {
-        operator fun invoke(): ApixuWeatherAPIService {
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor
+        ): ApixuWeatherAPIService {
 
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(connectivityInterceptor)
+                .build()
             return Retrofit.Builder()
+                .client(okHttpClient)
                 .baseUrl("http://api.weatherstack.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
