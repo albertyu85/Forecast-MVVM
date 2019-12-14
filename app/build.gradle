@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.forecastmvvm"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -63,4 +63,9 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    implementation 'org.kodein.di:kodein-di-generic-jvm:6.5.0'
+    implementation 'org.kodein.di:kodein-di-framework-android-core:6.5.0'
+    implementation 'org.kodein.di:kodein-di-framework-android-support:6.5.0'
+    implementation 'org.kodein.di:kodein-di-framework-android-x:6.5.0'
 }

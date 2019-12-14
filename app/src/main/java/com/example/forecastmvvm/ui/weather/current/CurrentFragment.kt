@@ -10,9 +10,7 @@ import androidx.lifecycle.Observer
 import com.example.forecastmvvm.R
 import com.example.forecastmvvm.data.network.*
 import kotlinx.android.synthetic.main.current_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class CurrentFragment : Fragment() {

@@ -8,6 +8,7 @@ import androidx.room.Query
 import com.example.forecastmvvm.data.database.entity.CURRENT_WEATHER_ID
 import com.example.forecastmvvm.data.database.entity.CurrentWeatherEntry
 import com.example.forecastmvvm.data.database.unitlocalized.BriefCurrentWeatherEntry
+import com.example.forecastmvvm.data.database.unitlocalized.DetailedCurrentWeatherEntry
 
 @Dao
 interface CurrentWeatherDao {
@@ -19,5 +20,8 @@ interface CurrentWeatherDao {
     fun getBrief() : LiveData<BriefCurrentWeatherEntry>
 
     @Query("select * from current_weather where id = $CURRENT_WEATHER_ID")
-    fun getDetailed() : LiveData<BriefCurrentWeatherEntry>
+    fun getDetailed() : LiveData<DetailedCurrentWeatherEntry>
+
+    @Query("select * from current_weather where id = $CURRENT_WEATHER_ID")
+    fun getAll() : LiveData<CurrentWeatherEntry>
 }
